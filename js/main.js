@@ -11,13 +11,13 @@ window.onload = () => {
     mapService.initMap()
         .then(() => {
 
-            mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+            mapService.addMarker();
         })
         .catch(console.log('INIT MAP ERROR'));
 
     locService.getPosition()
         .then(pos => {
-
+            mapService.getMyLocation(pos.coords.latitude, pos.coords.longitude);
             console.log('User position is:', pos.coords);
         })
         .catch(err => {
@@ -27,7 +27,7 @@ window.onload = () => {
 
 document.querySelector('.btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
-    mapService.panTo(35.6895, 139.6917);
+    mapService.panTo();
 })
 
 // var place = mapService.getReverseGeocodingData(32.0749831,34.9120554)
