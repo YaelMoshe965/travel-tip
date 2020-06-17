@@ -1,7 +1,4 @@
 
-import { locService } from './loc.service.js'
-
-
 export const mapService = {
     initMap,
     addMarker,
@@ -66,18 +63,7 @@ function _connectGoogleApi() {
     })
 }
 
-
-function getLocationName() {
-    // var lat =  locService.getPosition().then(pos => { return pos.coords.latitude})
-    // var long = locService.getPosition().then(pos => { return pos.coords.longitude})
-
-    locService.getPosition()
-        .then(pos => { 
-           console.log(pos.coords.latitude);
-           console.log(pos.coords.longitude);
-        })
-
-
+function getLocationName(lat, long) {
     const API_KEY = 'AIzaSyCVC9-UAU0nHyup7lFg9fcTBxZGV9J0x1g';
     return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${API_KEY}`)
         .then((res) => { return res.json(); })
@@ -85,16 +71,16 @@ function getLocationName() {
         .then((res) => { return res.results[0].formatted_address })
 }
 
-
-const W_KEY = 'fe013b1934aedb8d8f18b3e7958a4db3';
-function getWeatherLocation() {
+function getWeatherLocation(lat, long) {
+    const W_KEY = 'fe013b1934aedb8d8f18b3e7958a4db3';
     return new Promise(resolve => {
-        axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=32.0749831&lon=34.9120554&APPID=${W_KEY}`)
+        axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${W_KEY}`)
             .then(result => {
-                const weather = result.data
+                const tempK = result.data.main.temp;
+                const tempC = Math.round(tempK - 273.15);
                 console.log('result', result);
 
-                resolve(weather);
+                resolve(tempC);
             })
-})
+    })
 }
