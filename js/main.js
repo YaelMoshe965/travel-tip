@@ -22,8 +22,8 @@ window.onload = () => {
         })
         .catch(console.log('INIT MAP ERROR'));
 
-        renderLocationName()
-        renderWeather()
+    renderLocationName()
+    renderWeather()
 }
 
 document.querySelector('.btn').addEventListener('click', (ev) => {
@@ -46,6 +46,6 @@ function renderWeather() {
     locService.getPosition()
         .then(pos => {
             mapService.getWeatherLocation(pos.coords.latitude, pos.coords.longitude)
-                .then(res => { document.querySelector('#weather').innerText = `Weather Today: ${res} c`})
+                .then(res => { document.querySelector('.weather').innerText = `Weather Today: ${res} C` })
         })
 }

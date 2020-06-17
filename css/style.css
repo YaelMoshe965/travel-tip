@@ -56,10 +56,25 @@ p span {
     display: flex;
 }
 
-#weather {
+.weather {
+    width: 30%; 
+    height: 100px;
     background-color: #ffffff;
     color: #646062;
     text-align: center;
     line-height: 100px;
     border: 1px solid #7c6062;
+    margin-right: 30px;
 }
+
+
+
+.map{
+   width: 60%; 
+   height: 400px;
+}
+
+.btn-copy{
+    margin-bottom: 20px;
+}
+
