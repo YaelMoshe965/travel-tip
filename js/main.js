@@ -30,8 +30,9 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
     mapService.panTo();
 })
 
-// var place = mapService.getReverseGeocodingData(32.0749831,34.9120554)
-// console.log(place);
+renderLocationName()
 
+function renderLocationName(){
 mapService.getLocationName()
-
+.then(res =>{document.querySelector('p').innerText = 'Location: ' + res})
+}
