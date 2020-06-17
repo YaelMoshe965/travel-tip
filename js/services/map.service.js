@@ -72,9 +72,9 @@ function getLocationName() {
     // var long = locService.getPosition().then(pos => { return pos.coords.longitude})
 
     locService.getPosition()
-        .then(pos => { 
-           console.log(pos.coords.latitude);
-           console.log(pos.coords.longitude);
+        .then(pos => {
+            console.log(pos.coords.latitude);
+            console.log(pos.coords.longitude);
         })
 
 
@@ -85,9 +85,11 @@ function getLocationName() {
         .then((res) => { return res.results[0].formatted_address })
 }
 
+getWeatherLocation()
 
-const W_KEY = 'fe013b1934aedb8d8f18b3e7958a4db3';
 function getWeatherLocation() {
+
+    const W_KEY = 'fe013b1934aedb8d8f18b3e7958a4db3';
     return new Promise(resolve => {
         axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=32.0749831&lon=34.9120554&APPID=${W_KEY}`)
             .then(result => {
@@ -96,5 +98,5 @@ function getWeatherLocation() {
 
                 resolve(weather);
             })
-})
+    })
 }
