@@ -2,7 +2,8 @@
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    getLocationName
 }
 
 
@@ -52,4 +53,11 @@ function _connectGoogleApi() {
 }
 
 
+function getLocationName(){
+const API_KEY = 'AIzaSyCVC9-UAU0nHyup7lFg9fcTBxZGV9J0x1g';
+fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=${API_KEY}`)
+    .then((res) => { return res.json(); })
+    .catch((err) => { console.log('Had issues1:', err)})
+    .then((res) => { console.log('res:', res) })
+}
 
