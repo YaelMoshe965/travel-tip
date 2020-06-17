@@ -32,11 +32,9 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
     })    
 })
 
-// var place = mapService.getReverseGeocodingData(32.0749831,34.9120554)
-// console.log(place);
+renderLocationName()
 
+function renderLocationName(){
 mapService.getLocationName()
-
-
-mapService.getWeatherLocation()
-
+.then(res =>{document.querySelector('p').innerText = 'Location: ' + res})
+}

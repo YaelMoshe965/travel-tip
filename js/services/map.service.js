@@ -1,4 +1,7 @@
 
+import { locService } from './loc.service.js'
+
+
 export const mapService = {
     initMap,
     addMarker,
@@ -65,11 +68,21 @@ function _connectGoogleApi() {
 
 
 function getLocationName() {
+    // var lat =  locService.getPosition().then(pos => { return pos.coords.latitude})
+    // var long = locService.getPosition().then(pos => { return pos.coords.longitude})
+
+    locService.getPosition()
+        .then(pos => { 
+           console.log(pos.coords.latitude);
+           console.log(pos.coords.longitude);
+        })
+
+
     const API_KEY = 'AIzaSyCVC9-UAU0nHyup7lFg9fcTBxZGV9J0x1g';
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=${API_KEY}`)
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${API_KEY}`)
         .then((res) => { return res.json(); })
         .catch((err) => { console.log('Had issues1:', err) })
-        .then((res) => { console.log('res:', res) })
+        .then((res) => { return res.results[0].formatted_address })
 }
 
 
@@ -83,7 +96,5 @@ function getWeatherLocation() {
 
                 resolve(weather);
             })
-    })
-
+})
 }
-
