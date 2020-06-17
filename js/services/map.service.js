@@ -4,7 +4,8 @@ export const mapService = {
     addMarker,
     panTo,
     getLocationName,
-    getMyLocation
+    getMyLocation,
+    getWeatherLocation
 }
 
 
@@ -29,7 +30,7 @@ function getMyLocation(lat, lng) {
     var pos = {
         lat,
         lng
-    }    
+    }
     panTo(pos.lat, pos.lng)
     addMarker(pos);
 }
@@ -63,11 +64,26 @@ function _connectGoogleApi() {
 }
 
 
-function getLocationName(){
-const API_KEY = 'AIzaSyCVC9-UAU0nHyup7lFg9fcTBxZGV9J0x1g';
-fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=${API_KEY}`)
-    .then((res) => { return res.json(); })
-    .catch((err) => { console.log('Had issues1:', err)})
-    .then((res) => { console.log('res:', res) })
+function getLocationName() {
+    const API_KEY = 'AIzaSyCVC9-UAU0nHyup7lFg9fcTBxZGV9J0x1g';
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=${API_KEY}`)
+        .then((res) => { return res.json(); })
+        .catch((err) => { console.log('Had issues1:', err) })
+        .then((res) => { console.log('res:', res) })
+}
+
+
+const W_KEY = 'fe013b1934aedb8d8f18b3e7958a4db3';
+function getWeatherLocation() {
+    return new Promise(resolve => {
+        axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=32.0749831&lon=34.9120554&APPID=${W_KEY}`)
+            .then(result => {
+                const weather = result.data
+                console.log('result', result);
+
+                resolve(weather);
+            })
+    })
+
 }
 
